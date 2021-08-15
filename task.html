@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tasks</title>
+    <script>
+        //1. First let the DOM content get loaded.
+     document.addEventListener('DOMContentLoaded', function(){ 
+         //3. By default Submit is disabled
+         document.querySelector('#submit').disabled = true;
+
+         /*we wat to add and eventhandler when we type an input field. Becasue
+         we do not want the sub,it field to be disabled when typing the input */
+         document.querySelector('#task').onkeyup = () => {
+             if(document.querySelector('#task').value.length > 0 ) { //5.
+                document.querySelector('#submit').disabled = false;
+             } else {
+                document.querySelector('#submit').disabled = true;
+             }
+             
+         }
+        document.querySelector('form').onsubmit = () =>{//2. After DOM is loaded and when the form is sumbitted, load a function
+          const task = document.querySelector('#task').value;
+          const li = document.createElement('li'); // We are creaing a list item li
+          li.innerHTML= task; //we created a list item li. what value should go in that li is the task = what user has inputted in the form
+          document.querySelector('#tasks').append(li); //Geth the element with id tasks and append to it the value of li
+          document.querySelector('#task').value=''; //create empty value in task field
+          document.querySelector('#submit').disabled=true; //4.
+         
+         return false; //Stop the form from submitting
+        }
+        });
+        
+    </script>
+</head>
+<body>
+    <h1>Tasks</h1>
+    <ul id="tasks">
+
+    </ul>
+    <form>
+        <input id="task" placeholder="Enter Task" type="text">
+        <input id="submit" type="submit">
+    </form>
+
+</body>
+</html>
